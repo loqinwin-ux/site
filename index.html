@@ -2,56 +2,113 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoenix PE Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Phoenix Access | Security Interface</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="glow-bg"></div>
-    <div class="container">
-        <div class="header">
-            <svg class="logo" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-            <h1>PHOENIX PE</h1>
-            <p class="sub">FrizMine | access tool</p>
-        </div>
-        
-        <div class="card">
-            <div class="input-group">
-                <input type="text" id="nickname" placeholder="введите ник игрока" autocomplete="off">
-                <button id="hackBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 9L12 15L18 9"/>
+    <div class="noise"></div>
+    <div class="gradient-orb"></div>
+    
+    <main class="container">
+        <div class="glass-panel">
+            <div class="status-badge">
+                <span class="pulse"></span>
+                <span>system online</span>
+            </div>
+            
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="url(#grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="url(#grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3B82F6"/>
+                                <stop offset="1" stop-color="#60A5FA"/>
+                            </linearGradient>
+                        </defs>
                     </svg>
-                    ВЗЛОМ
+                </div>
+                <h1>PHOENIX<span>ACCESS</span></h1>
+                <p class="tagline">authorized security interface</p>
+            </div>
+            
+            <div class="target-section">
+                <div class="input-wrapper">
+                    <label for="nickname">идентификатор цели</label>
+                    <div class="input-field">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <input type="text" id="nickname" placeholder="введите никнейм" autocomplete="off">
+                    </div>
+                </div>
+                
+                <button id="hackBtn" class="action-btn">
+                    <span>инициировать доступ</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
                 </button>
             </div>
             
-            <div id="result" class="result hidden">
-                <div class="loader"></div>
-                <p id="resultText"></p>
+            <div id="result" class="result-container hidden">
+                <div class="result-card">
+                    <div class="result-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
+                            <path d="M4 6v12a2 2 0 0 0 2 2h14v-6"/>
+                            <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h2v-4h-2z"/>
+                        </svg>
+                        <span>credentials extracted</span>
+                    </div>
+                    <div class="credential-display">
+                        <div class="cred-label">passphrase</div>
+                        <div class="cred-value" id="resultText">—</div>
+                    </div>
+                    <div class="copy-hint" id="copyHint">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        <span>нажми для копирования</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <span>phoenix.pe</span>
+                </div>
+                <div class="support-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 8v4l3 3"/>
+                    </svg>
+                    <span>frizmine core</span>
+                </div>
+                <div class="support-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>mcpe 1.21+</span>
+                </div>
             </div>
         </div>
         
-        <div class="info">
-            <div class="info-line">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="8" x2="12" y2="12"/>
-                    <line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-                <span>поддержка: Phoenix PE, FrizMine, Magma, MCPE</span>
-            </div>
-            <div class="info-line">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-                <span>база обновлена: 27.03.2026</span>
-            </div>
+        <div class="watermark">
+            <span>encrypted session • erafox security suite</span>
         </div>
-    </div>
+    </main>
     
     <script src="script.js"></script>
 </body>
