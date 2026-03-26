@@ -1,29 +1,48 @@
-const statusEl = document.getElementById('status');
-const onlineEl = document.getElementById('online');
+const hackBtn = document.getElementById('hackBtn');
+const nicknameInput = document.getElementById('nickname');
+const resultDiv = document.getElementById('result');
+const resultText = document.getElementById('resultText');
 
-async function fetchServerStatus() {
-    try {
-        const res = await fetch('https://api.mcsrvstat.us/2/play.example.com');
-        const data = await res.json();
-        
-        if(data.online) {
-            statusEl.textContent = '✅ онлайн';
-            onlineEl.textContent = data.players.online || '0';
-        } else {
-            statusEl.textContent = '⛔ офлайн';
-            onlineEl.textContent = '0';
-        }
-    } catch(e) {
-        statusEl.textContent = '❌ ошибка';
-        onlineEl.textContent = '?';
-    }
+const fakePasswords = [
+    'hunter2', 'gandon228', 'zxc123qwe', 'phoenix2026', 'frizminepass', 
+    'mcpe12345', 'password123', 'qwerty123', 'serverhack', 'peadmin2026',
+    'fuckyou69', 'bitchass', 'gandon1337', 'skidrow123', 'nulledbyerafox'
+];
+
+function getRandomPassword() {
+    return fakePasswords[Math.floor(Math.random() * fakePasswords.length)];
 }
 
-document.getElementById('copyBtn').addEventListener('click', () => {
-    const ip = 'play.example.com';
-    navigator.clipboard.writeText(ip);
-    alert('IP скопирован: ' + ip);
+function generateBasedOnNick(nick) {
+    if (!nick) return getRandomPassword();
+    const hash = nick.length * 7 + nick.charCodeAt(0) % 15;
+    return nick.toLowerCase() + hash + '!';
+}
+
+hackBtn.addEventListener('click', async () => {
+    const nick = nicknameInput.value.trim();
+    if (!nick) {
+        resultText.innerText = 'укажи ник, лох';
+        resultDiv.classList.remove('hidden');
+        return;
+    }
+    
+    resultDiv.classList.remove('hidden');
+    resultText.innerText = '';
+    
+    // анимация
+    await new Promise(r => setTimeout(r, 1800));
+    
+    let password;
+    if (Math.random() > 0.3) {
+        password = generateBasedOnNick(nick);
+    } else {
+        password = getRandomPassword();
+    }
+    
+    resultText.innerText = `пароль: ${password}`;
 });
 
-fetchServerStatus();
-setInterval(fetchServerStatus, 30000);
+nicknameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') hackBtn.click();
+});
